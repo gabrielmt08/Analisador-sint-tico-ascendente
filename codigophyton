@@ -1,0 +1,29 @@
+import ply.lex as lex
+
+# Lista de tokens
+tokens = ['ID', 'PLUS']
+
+# Regras de expressão regular para os tokens
+t_ID = r'[a-zA-Z_][a-zA-Z0-9_]*'
+t_PLUS = r'\+'
+
+# Ignorar espaços em branco e tabulações
+t_ignore = ' \t'
+
+# Tratamento de erros
+def t_error(t):
+    print(f"Caractere ilegal: '{t.value[0]}'")
+    t.lexer.skip(1)
+
+# Criação do analisador léxico
+lexer = lex.lex()
+
+# Entrada para análise
+input_text = "id + id"
+
+# Análise léxica
+lexer.input(input_text)
+
+# Teste de tokens
+for token in lexer:
+    print(token)
